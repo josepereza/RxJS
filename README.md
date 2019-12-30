@@ -27,7 +27,7 @@ En RxJs los streams están representados por "secuencias observables" o simplmen
 
 Un poco de patrón Observer
 El patrón Observer juega un papel fundamental y explica a la perfección, el concepto de reactivo. El patrón Observer define un productor de información, nuestro stream y que en RxJs está representado por una secuencia Observable o simplemente Observable y un consumidor de la misma, que sería el Observer. Como hemos visto, en RxJs el Observable es nuestro stream y que nos sirve para prácticamente todo: eventos del ratón, rangos de números, promesas, etc., pero ¿como es el Observer?
-
+```
 //Observable
 const myObservable$ = Rx.Observable.from([1,2,3]);
 
@@ -38,11 +38,12 @@ const myObserver = {
   complete: () => console.log(`Observer complete notification`),
 };
 
-myObservable$.subscribe(myObserver);  
+myObservable$.subscribe(myObserver); 
+```
 Como vemos el Observer es un objeto que dispone de 3 métodos para recibir información acerca del Observable. Cada uno de estos métodos cumple una función y a través de cada uno de ellos recibiremos distintos tipos de notificaciones del Observable.
 
 El Observer en sí mismo no devolverá ningún valor hasta que se active la comunicación entre ambas partes. Este mecanismo es la subscripción y nada se ejecutará hasta que establezcamos una subscripción. El método subscribe activa el Observable y habilita al Observer a recibir notificaciones del stream. No obstante, es posible establecer una subscripción pasando directamente funciones como argumentos, ya que internamente RxJs asignará cada uno de estos callbacks a los respectivos métodos del Observer, siguiendo el orden en el que son pasados, siendo el primero de ellos next, el segundo error y el tercero complete.
-
+```
 const arrayStream$ = Rx.Observable.from([1,2,3]);
 
 arrayStream$  
@@ -50,22 +51,25 @@ arrayStream$
      next => console.log(next),
      err => console.log(err),
      () => console.log('completed!')
-);    
+);   
+```
 El resultado en ambos casos es el mismo, no hay ninguna diferencia, pero esta forma suele ser algo más habitual ya que además no es necesario establecerlos todos.
 
 # Next
 Es el primer y más importante callback, que recibiremos en la subscripción, ya que el resto son opcionales y notifica un valor del stream emitido por el Observable.
-
+```
 Rx.Observable.from([1,2,3])  
   .subscribe(next => console.log(next));  // -> 1, 2, 3
+```
 # Error
 Se ejecuta cuando se ha producido un error o excepción.
-
+```
 Rx.Observable.from([1,2,3])  
   .subscribe(
      next => console.log(next),
      err => console.log(err)  // Se ha producido un error
 );
+```
 # Complete
 Complete es una notificación sin valor y se emite solo cuando el stream de datos ha finalizado:
 ```
@@ -127,7 +131,7 @@ Funciones de orden superior
 Las funciones de orden superior suelen ser muy utilizadas en la programación funcional. Son funciones puras, que reciben otras funciones como argumentos para la realización de cálculos. JavaScript está considerado un lenguaje funcional impuro ya que, si bien es un lenguaje imperativo, si tiene algunos elementos de la programación funcional descritos más arriba. Las funciones de orden superior como map, reduce o filter son un buen ejemplo de ello.
 
 Vamos a ver un ejemplo de empleo de este tipo de funciones con un Array de números de los cuales queremos obtener la suma de todos los que sean pares:
-
+```
 const source = [0,1,2,3,4,5];
 
 const result = source  
@@ -135,6 +139,8 @@ const result = source
   .reduce((acc, cur) => acc + cur) // -> 0 + 2 + 4 
 
 console.log(result) // OUTPUT >> 6  
+
+```
 En el ejemplo anterior vemos estas características en funcionamiento. Tanto filter como reduce son funciones de orden superior que reciben otras funciones (x % 2 === 0) y que además devuelven un nuevo Array manteniendo inalterado el original. Dado que source es una constante si alguna de estas funciones mutara su valor, tendríamos un error.
 
 RxJs tiene un fuerte componente de programación funcional y si bien no es necesario ser un total experto en programación funcional, si es importante tener claro al menos estos elementos. En RxJs vamos a trabajar de forma muy similar con un pipeline de funciones que recibirán (y devolverán) un Observable y que nunca mutarán el stream original.
