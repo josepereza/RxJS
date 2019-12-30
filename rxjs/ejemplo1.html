@@ -1,0 +1,25 @@
+<!DOCTYPE>
+<html>
+
+<head>
+ <title></title>
+ <script src="rx.all.js">
+ </script>
+ 
+</head>
+
+<body>
+ <input type="button" id="boton" value="pulsar" />
+</body>
+<script type="text/javascript">
+   var interval=Rx.Observable.interval(300)
+   .takeUntil(Rx.Observable.timer(5000))
+
+    .finally(()=>console.log('All do'))
+    const subscription=interval.subscribe(x=>console.log(x))
+  
+    </script>
+
+ </script>
+ </html>
+

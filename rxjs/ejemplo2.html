@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+ <title></title>
+ <script src="rx.all.js">
+ </script>
+ 
+</head>
+
+<body>
+ <input type="button" id="boton" value="pulsar" />
+
+<script>
+const boton1=document.getElementById("boton");
+const btnStream$=Rx.Observable.fromEvent(boton1,'click');
+btnStream$.subscribe(
+    function(e){
+        console.log('cliqueado')
+    },
+    function (err){
+        console.log();
+    }
+)
+    
+
+ </script>
+ </body>
+ </html>
