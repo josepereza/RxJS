@@ -53,12 +53,12 @@ arrayStream$
 );    
 El resultado en ambos casos es el mismo, no hay ninguna diferencia, pero esta forma suele ser algo más habitual ya que además no es necesario establecerlos todos.
 
-Next
+# Next
 Es el primer y más importante callback, que recibiremos en la subscripción, ya que el resto son opcionales y notifica un valor del stream emitido por el Observable.
 
 Rx.Observable.from([1,2,3])  
   .subscribe(next => console.log(next));  // -> 1, 2, 3
-Error
+# Error
 Se ejecuta cuando se ha producido un error o excepción.
 
 Rx.Observable.from([1,2,3])  
@@ -66,15 +66,16 @@ Rx.Observable.from([1,2,3])
      next => console.log(next),
      err => console.log(err)  // Se ha producido un error
 );
-#Complete
+# Complete
 Complete es una notificación sin valor y se emite solo cuando el stream de datos ha finalizado:
-
+```
 Rx.Observable.from([1,2,3])  
   .subscribe(
      next => console.log(next),
      err => console.log(err),
      () => console.log('completed!')  // Se ejecuta cuando finaliza el stream, después del (3)
 );
+```
 Es importante destacar que existen streams finitos y streams inifinitos, que nunca llegan a emitir un complete. Un stream sobre un evento, click de ratón, movimiento del ratón o similares, nunca llegaran a emitir un complete.
 
 Estos 3 métodos han sido modificados en la versión 5 de RxJs para alinearlos con los métodos de la propuesta de Observable para ECMAScript ya que en versiones anteriores estos métodos eran: onNext() onComplete() y onError() y mucha de la documentación existente hace referencia a ellos pero pertenecen a versiones anteriores de RxJs.
@@ -84,7 +85,7 @@ Dentro del patrón Observer existen diversas implementaciones donde la iniciativ
 
 Un poco de patrón Iterador
 Otro de los patrones en los que se inspira RxJs, es el patrón iterador , que nos permite iterar contenedores de información como, por ejemplo, un Array, sin exponer su representación interna. Para ello se define un iterador -next-, que será el encargado de recorrer el contenedor de información, manteniendo el cursor o índice con la posición del último valor dado:
-
+```
 const simpleIterator = data => {  
   let cursor = 0;
   return {
@@ -111,6 +112,8 @@ const myStream$ = myCustomObservable([1,2,3]);
 
 myStream$  
   .subscribe(x => console.log(`next ${ x }`));
+  
+  ```
 Un poco de programación funcional
 La programación funcional, es el otro gran pilar sobre el que sea asienta RxJs y su influencia es realmente grande. La programación funcional está de moda y eso que no es especialmente nueva. Lenguajes como Haskell peina canas ya, pero como los pantalones de pitillo, todo vuelve. Para hablar en extensión de la programación funcional harían falta varios posts y esto queda lejos del objetivo de éste, pero si es importante destacar al menos las características que más afectan a su uso en Rxjs:
 
