@@ -223,7 +223,7 @@ Existen varias versiones de Subject que modifican ligeramente su comportamiento 
     BehaviorSubject: comienza emitiendo el último valor que se ha producido. Al crearlo se le puede pasar un valor por defecto, que será el que se emita al crear una subscripción en caso de no haberse emitido aún ningún valor.
     ReplaySubject: cuando se crea una subscripción a este tipo de subject se emiten todos los valores que se han producido hasta el momento, incluyendo los que se produjeron antes de crearse la subscripción
 
-Operadores
+# Operadores
 
 Una de las herramientas más importantes con las que cuenta RxJS es el uso de operadores.
 
@@ -238,11 +238,11 @@ Existen distintos tipos de operadores entre los que destacan los siguientes:
 
 Estos son alguno de los operadores más comunes:
 
-    create: se utiliza principalmente para pruebas. Se crea un observable pasando como parámetro una función con un observer.
-    from: crea un observable a partir de un arrays, una cadenas, Promises o iterables.
-    of: convierte los argumentos que se pasan a la función en valores que emite el observable creado y emite una notificación de completado al terminar.
-    interval: crea un observable que emite valores numéricos según el intervalo que se indique al crearlo.
-    timer: similar a interval, añade un primer parámetro que indica la pausa inicial antes de emitir un número. Si contiene un segundo parámetro, este se utiliza como interval, para generar valores periódicamente.
+   * create: se utiliza principalmente para pruebas. Se crea un observable pasando como parámetro una función con un observer.
+   * from: crea un observable a partir de un arrays, una cadenas, Promises o iterables.
+   * of: convierte los argumentos que se pasan a la función en valores que emite el observable creado y emite una notificación de completado al terminar.
+   * interval: crea un observable que emite valores numéricos según el intervalo que se indique al crearlo.
+   * timer: similar a interval, añade un primer parámetro que indica la pausa inicial antes de emitir un número. Si contiene un segundo parámetro, este se utiliza como interval, para generar valores periódicamente.
     toPromise: convierte un obserbable en una Promise.
     combineLatest: toma como parámetros distintos observables y emite datos cada vez que uno de ellos genera datos nuevos, combinando estos últimos datos con los más recientes del resto de observables que contiene.
     concat: según el orden en que se pasen los observables como parámetros, los ejecuta en orden, no pasando al siguiente hasta que no se ha completado el actual.
