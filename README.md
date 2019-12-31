@@ -169,7 +169,7 @@ Estos son los conceptos básicos utilizados para este patrón:
     Operadores: permiten realizar operaciones con los datos enviados por el observer o el subject antes de ser enviados al observable. Se pueden encadenar.
 
 En este ejemplo se crea un observable mediante el operador create.
-
+```
 import { Observable } from 'rxjs';
 
 const observable = Observable.create((observer) => {
@@ -182,11 +182,11 @@ const subscripcion = observable.subscribe({
   error: err => console.error('Error: ' + err),
   complete: () => console.log('Terminado'),
 });
-
+```
 El método subscribe del observable puede contener un único parámetro, que sería la función que se ejecuta cada vez que el observable emite un valor, o como en este ejemplo, contener tres funciones, la primera para cuando se emite un valor, la segunda en caso de error y la última para cuando se emite el último valor, en caso de no haberse producido ningún error antes
 
 En este ejemplo se crea el observable a partir de un evento. input$ representa el flujo de datos que proviene de cualquier interacción que haga el usuario con elementoHtml.
-
+```
 const elementoHtml = document.querySelector('input[type=text]');
 
 const input$ = Rx.Observable.fromEvent(elemento, 'input');
@@ -196,9 +196,9 @@ const subscripcion = input$.subscribe({
   error: err => console.log(`Error: ${err}`),
   complete: () => console.log(`Completado`),
 });
-
+```
 Mediante Subject, además de crearse la subscripción, es desde el propio Subject desde donde se emiten los valores.
-
+```
 let subject = new Rx.Subject();
 
 var subscription = subject.subscribe(
@@ -216,7 +216,7 @@ subject.onCompleted();
 // => onCompleted
 
 subscription.dispose();
-
+```
 Existen varias versiones de Subject que modifican ligeramente su comportamiento habitual:
 
     AsyncSubject: tan solo emite el último valor producido desde el observable en el momento en que este se ha completado.
@@ -238,31 +238,31 @@ Existen distintos tipos de operadores entre los que destacan los siguientes:
 
 Estos son alguno de los operadores más comunes:
 
-   * create: se utiliza principalmente para pruebas. Se crea un observable pasando como parámetro una función con un observer.
-   * from: crea un observable a partir de un arrays, una cadenas, Promises o iterables.
-   * of: convierte los argumentos que se pasan a la función en valores que emite el observable creado y emite una notificación de completado al terminar.
-   * interval: crea un observable que emite valores numéricos según el intervalo que se indique al crearlo.
-   * timer: similar a interval, añade un primer parámetro que indica la pausa inicial antes de emitir un número. Si contiene un segundo parámetro, este se utiliza como interval, para generar valores periódicamente.
-    toPromise: convierte un obserbable en una Promise.
-    combineLatest: toma como parámetros distintos observables y emite datos cada vez que uno de ellos genera datos nuevos, combinando estos últimos datos con los más recientes del resto de observables que contiene.
-    concat: según el orden en que se pasen los observables como parámetros, los ejecuta en orden, no pasando al siguiente hasta que no se ha completado el actual.
-    merge: permite juntar dos flujos de datos en uno, ejecutándose simultáneamente.
-    zip: espera a que todos los observables que lo componen emitan algún valor antes de generar un array combinandolos todos.
-    filter: emite solo los valores que cumple una cierta condición.
-    take: emite un número máximo de valores antes de completar el observable.
-    skip: se salta el número indicado de los primero valores generados por el observable.
-    delay: retrasa la emisión de valores durante el tiempo indicado.
-    debounceTime: descarta los valores emitidos entre un cierto intervalo de tiempo. Si se le pasa por parámetro 1 segundo, no emitirá más de un valor por segundo.
-    bufferTime: almacena todos los valores generados y los emite como array en el periodo indicado en el parámetro.
-    map: permite aplicar cambios a cada uno de los valores emitidos.
-    mergeMap: combina dos observables de forma que cada vez que el interno emite un valor, lo combina con el valor del observable externo.
-    switchMap: combina dos observables reiniciando el observable interno cada vez que se produce un nuevo valor del externo.
-    catchError: captura los errores del observable.
-    retry: reintenta ejecutar el observable el número de veces indicado. Muy útil cuando es un error que puede ser temporal, como al ejecutar una petición ajax que puede fallar por falta de conexión.
-    tap: permite efectuar acciones sobre los datos emitidos sin transformarlos.
+   * **create:** se utiliza principalmente para pruebas. Se crea un observable pasando como parámetro una función con un observer.
+   * **from:** crea un observable a partir de un arrays, una cadenas, Promises o iterables.
+   * **of:** convierte los argumentos que se pasan a la función en valores que emite el observable creado y emite una notificación de completado al terminar.
+   * **interval:** crea un observable que emite valores numéricos según el intervalo que se indique al crearlo.
+   * **timer:** similar a interval, añade un primer parámetro que indica la pausa inicial antes de emitir un número. Si contiene un segundo parámetro, este se utiliza como interval, para generar valores periódicamente.
+   * **toPromise:** convierte un obserbable en una Promise.
+   * **combineLatest:** toma como parámetros distintos observables y emite datos cada vez que uno de ellos genera datos nuevos, combinando estos últimos datos con los más recientes del resto de observables que contiene.
+   * **concat:** según el orden en que se pasen los observables como parámetros, los ejecuta en orden, no pasando al siguiente hasta que no se ha completado el actual.
+   * **merge:** permite juntar dos flujos de datos en uno, ejecutándose simultáneamente.
+   * **zip:** espera a que todos los observables que lo componen emitan algún valor antes de generar un array combinandolos todos.
+   * **filter:** emite solo los valores que cumple una cierta condición.
+   * **take:** emite un número máximo de valores antes de completar el observable.
+   * **skip:** se salta el número indicado de los primero valores generados por el observable.
+   * **delay:** retrasa la emisión de valores durante el tiempo indicado.
+   * **debounceTime:** descarta los valores emitidos entre un cierto intervalo de tiempo. Si se le pasa por parámetro 1 segundo, no emitirá más de un valor por segundo.
+   * **bufferTime:** almacena todos los valores generados y los emite como array en el periodo indicado en el parámetro.
+   * **map:** permite aplicar cambios a cada uno de los valores emitidos.
+   * **mergeMap:** combina dos observables de forma que cada vez que el interno emite un valor, lo combina con el valor del observable externo.
+   * **switchMap:** combina dos observables reiniciando el observable interno cada vez que se produce un nuevo valor del externo.
+   * **catchError:** captura los errores del observable.
+   * **retry:** reintenta ejecutar el observable el número de veces indicado. Muy útil cuando es un error que puede ser temporal, como al ejecutar una petición ajax que puede fallar por falta de conexión.
+   * **tap:** permite efectuar acciones sobre los datos emitidos sin transformarlos.
 
-Los operadores se pueden encadenar mediante el uso de la función pipe() de la siguiente forma:
-
+Los operadores se pueden encadenar mediante el uso de la función **pipe()** de la siguiente forma:
+```
 import { filter, map } from 'rxjs/operators';
 
 const numeros = of(1, 2, 3, 4, 5)
@@ -272,4 +272,4 @@ const numeros = of(1, 2, 3, 4, 5)
   );
 
 numeros.subscribe(x => console.log(x));
-
+```
