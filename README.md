@@ -1,4 +1,5 @@
 boiler : https://github.com/bradtraversy/rxjs_boiler
+latest version: https://github.com/Reactive-Extensions/RxJS/blob/master/doc/libraries/main/rx.complete.md
 # RxJS
 Tutorial de RxJS
 
