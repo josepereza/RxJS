@@ -8,9 +8,10 @@ La programación Reactiva es programación orientada al manejo de streams de dat
 
 Stream
 Un stream es un flujo de datos y tradicionalmente los streams han estado ligados a operaciones I/O como lectura/escritura de ficheros o querys a base de datos. En RxJs, no es muy diferente ya que sea cual sea el origen de la información, será tratada como un stream.Aqui podemos ver stream muy simple que emite los valores contenidos en un Array:
-
+```
 const arrayStream$ = Rx.Observable.from([10,20,30]);  
 // >> 10, 20, 30
+```
 Una de las máximas en la programación reactiva es que "todo es un stream" por lo que con RxJs, cualquier flujo de información será tratada como un stream. Eventos del ratón, Arrays, rangos de números, promesas, etc. Todo será un stream.
 
 //Una letra es un stream
@@ -27,7 +28,7 @@ const clicksStream$ = Rx.Observable.fromEvent(document, 'click');
 const promiseStream$ = Rx.Observable.fromPromise(fetch(’/products'));  
 En RxJs los streams están representados por "secuencias observables" o simplmente Observables, por lo que en RxJs todo, absolutamente todo es un Observable, lo que logicamente nos lleva al patrón Observer.
 
-Un poco de patrón Observer
+## Un poco de patrón Observer
 El patrón Observer juega un papel fundamental y explica a la perfección, el concepto de reactivo. El patrón Observer define un productor de información, nuestro stream y que en RxJs está representado por una secuencia Observable o simplemente Observable y un consumidor de la misma, que sería el Observer. Como hemos visto, en RxJs el Observable es nuestro stream y que nos sirve para prácticamente todo: eventos del ratón, rangos de números, promesas, etc., pero ¿como es el Observer?
 ```
 //Observable
